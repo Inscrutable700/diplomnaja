@@ -1,0 +1,28 @@
+﻿@model Web.ViewModels.UserListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.ID</td>
+                <td><a href="@Url.Action("Item", "User", new { id = user.ID })">@user.Name</a></td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

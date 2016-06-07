@@ -1,13 +1,20 @@
-﻿using Business.Managers;
+﻿using System;
+using Business.Managers;
 using Data;
 
 namespace Business
 {
-    public class BusinessContext
+    public class BusinessContext : IDisposable
     {
         private RepositoryContext repositoryContext;
 
         private UserManager userManager;
+
+        private AcademicSubjectManager academicSubjectManager;
+
+        private TestManager testManager;
+
+        private QuestionManager questionManager;
 
         public BusinessContext()
         {
@@ -25,6 +32,51 @@ namespace Business
 
                 return this.userManager;
             }
+        }
+
+        public AcademicSubjectManager AcademicSubjectManager
+        {
+            get
+            {
+                if (this.academicSubjectManager == null)
+                {
+                    this.academicSubjectManager = new AcademicSubjectManager(this.repositoryContext);
+                }
+
+                return this.academicSubjectManager;
+            }
+        }
+
+        public TestManager TestManager
+        {
+            get
+            {
+                if (this.testManager == null)
+                {
+                    this.testManager = new TestManager(this.repositoryContext);
+                }
+
+                return this.testManager;
+            }
+        }
+
+        public QuestionManager QuestionManager
+        {
+            get
+            {
+                if (this.questionManager == null)
+                {
+                    this.questionManager = new QuestionManager(this.repositoryContext);
+                }
+
+                return this.questionManager;
+            }
+        }
+
+        public void Dispose()
+        {
+            repositoryContext.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

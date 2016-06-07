@@ -1,0 +1,29 @@
+﻿@model Web.ViewModels.TestListViewModel
+@{
+    ViewBag.Title = "Test list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a href="@Url.Action("AddOrUpdate", "Tests")" class="btn-success">Add new test</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in Model.Tests)
+        {
+            <tr>
+                <td>@test.ID</td>
+                <td><a href="@Url.Action("Item", "Tests", new { id = test.ID })">@test.Name</a></td>
+                <td>@test.Description</td>
+                <td><a href="@Url.Action("AddOrUpdate", "Tests", new { id = test.ID })">Edit</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

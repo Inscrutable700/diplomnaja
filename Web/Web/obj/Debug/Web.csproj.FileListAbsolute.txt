@@ -174,3 +174,11 @@ C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Microsoft.Owin.Security.Micro
 C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\obj\Debug\Web.dll
 C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\obj\Debug\Web.pdb
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Business.dll
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Core.dll
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Data.dll
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Business.pdb
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Core.pdb
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\Data.pdb
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\AutoMapper.dll
+C:\Users\ashevchuk\Projects\diplomnaja\Web\Web\bin\AutoMapper.xml

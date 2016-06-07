@@ -5,6 +5,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Business;
+using Core.Enums;
+using Data.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -156,7 +159,18 @@ namespace Web.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    User newUser = new User
+                    {
+                        Type = UserType.Student,
+                        Email = model.Email,
+                        Name = model.Email,
+                    };
+
+                    using (BusinessContext businessContext = new BusinessContext())
+                    {
+                        newUser = businessContext.UserManager.AddUser(newUser);
+                    }
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -165,6 +179,7 @@ namespace Web.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+
                 AddErrors(result);
             }
 

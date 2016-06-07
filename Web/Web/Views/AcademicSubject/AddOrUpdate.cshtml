@@ -1,0 +1,34 @@
+﻿@model Web.ViewModels.AddOrUpdateAcademicSubjectViewModel
+@{
+    ViewBag.Title = "Add new academic subject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-horizontal" action="@Url.Action("AddOrUpdate", "AcademicSubject")" method="post">
+    @if (Model.IsUpdate)
+    {
+        <input type="hidden" name="id" value="@Model.AcademicSubject.ID" />
+    }
+    <div class="form-group">
+        <label class="col-md-2 control-label">Name</label>
+        <div class="col-md-10">
+            <input class="form-control" name="Name" required value="@Model.AcademicSubject.Name"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Description</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="Description" required>@Model.AcademicSubject.Description</textarea>
+        </div>
+    </div>
+
+    @if (Model.IsUpdate)
+    {
+        <input type="submit" class="btn-success" value="Update" />
+    }
+    else
+    {
+        <input type="submit" class="btn-success" value="Add" />
+    }
+
+</form>

@@ -7,5 +7,6 @@
         T Get(int id);
         T[] List();
         void Delete(T entity);
+        T[] AddRange(T[] entities);
     }
 }
