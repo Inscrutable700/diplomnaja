@@ -17,5 +17,7 @@ namespace Data.Models
         public DateTime DateStart { get; set; }
 
         public DateTime DateEnd { get; set; }
+
+        public int QuestionCount { get; set; }
     }
 }

@@ -14,5 +14,11 @@ namespace Data
         public DbSet<Question> Questions { get; set; }
 
         public DbSet<AvailableAnswer> AvailableAnswer { get; set; }
+
+        public DbSet<Group> Groups { get; set; }
+
+        public DbSet<GroupToTest> GroupToTests { get; set; }
+
+        public DbSet<UserToQuestion> UserToQuestions { get; set; }
     }
 }
