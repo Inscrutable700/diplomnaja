@@ -33,16 +33,15 @@
 {
     <h2>Users</h2>
 
-    <form class="form-control" action="@Url.Action("AddUserToGroup", "Groups")" method="post">
+    <form class="form-horizontal" action="@Url.Action("AddUserToGroup", "Groups")" method="post">
         <input type="hidden" name="groupID" value="@Model.Group.ID" />
         <div class="form-group">
             <label class="col-md-2 control-label">User</label>
-            <div class="col-md-10">
+            <div class="col-md-4">
                 @Html.DropDownList("userID", Model.AllOtherUsers, new { @class = "form-control" })
             </div>
-            <div class="col-md-2">
-                <input type="submit" class="btn-success" value="Add User" />
-            </div>
+
+            <input type="submit" class="col-md-2 form-control btn-success" value="Add User" />
         </div>
     </form>
 

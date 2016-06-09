@@ -19,6 +19,8 @@ namespace Data
 
         private GroupRepository groupRepository;
 
+        private GroupToTestRepository groupToTestRepository;
+
         public RepositoryContext()
         {
             this.dataContext = new DataContext();
@@ -99,6 +101,19 @@ namespace Data
                 }
 
                 return this.groupRepository;
+            }
+        }
+
+        public GroupToTestRepository GroupToTestRepository
+        {
+            get
+            {
+                if(this.groupToTestRepository == null)
+                {
+                    this.groupToTestRepository = new GroupToTestRepository(this.dataContext);
+                }
+
+                return this.groupToTestRepository;
             }
         }
 

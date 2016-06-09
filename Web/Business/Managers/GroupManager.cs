@@ -46,5 +46,16 @@ namespace Business.Managers
             user.GroupID = groupID;
             this.repositoryContext.UserRepository.Update(user);
         }
+
+        public void AddTestToGroup(int groupID, int testID)
+        {
+            var groupToTest = new GroupToTest
+            {
+                GroupID = groupID,
+                TestID = testID,
+            };
+
+            this.repositoryContext.GroupToTestRepository.Add(groupToTest);
+        }
     }
 }
