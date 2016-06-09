@@ -7,13 +7,13 @@ namespace Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddSomeTablesAgain : IMigrationMetadata
+    public sealed partial class Some : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddSomeTablesAgain));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Some));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606071715467_AddSomeTablesAgain"; }
+            get { return "201606090825500_Some"; }
         }
         
         string IMigrationMetadata.Source

@@ -17,6 +17,8 @@ namespace Data
 
         private AvailableAnswerRepository availableAnswerRepository;
 
+        private GroupRepository groupRepository;
+
         public RepositoryContext()
         {
             this.dataContext = new DataContext();
@@ -84,6 +86,19 @@ namespace Data
                 }
 
                 return this.availableAnswerRepository;
+            }
+        }
+
+        public GroupRepository GroupRepository
+        {
+            get
+            {
+                if(this.groupRepository == null)
+                {
+                    this.groupRepository = new GroupRepository(this.dataContext);
+                }
+
+                return this.groupRepository;
             }
         }
 

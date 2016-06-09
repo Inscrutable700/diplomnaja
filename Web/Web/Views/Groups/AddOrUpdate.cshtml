@@ -1,0 +1,71 @@
+﻿@model Web.ViewModels.AddOrUpdateGroupViewModel
+
+@{
+    ViewBag.Title = "AddOrUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-horizontal" action="@Url.Action("AddOrUpdate", "Groups")" method="post">
+    @if (Model.IsUpdate)
+    {
+        <input type="hidden" name="id" value="@Model.Group.ID" />
+    }
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Name</label>
+        <div class="col-md-10">
+            <input class="form-control" name="Name" required value="@Model.Group.Name" />
+        </div>
+    </div>
+
+    @if (Model.IsUpdate)
+    {
+        <input type="submit" class="btn-success" value="Update" />
+    }
+    else
+    {
+        <input type="submit" class="btn-success" value="Add" />
+    }
+
+</form>
+
+@if (Model.IsUpdate)
+{
+    <h2>Users</h2>
+
+    <form class="form-control" action="@Url.Action("AddUserToGroup", "Groups")" method="post">
+        <input type="hidden" name="groupID" value="@Model.Group.ID" />
+        <div class="form-group">
+            <label class="col-md-2 control-label">User</label>
+            <div class="col-md-10">
+                @Html.DropDownList("userID", Model.AllOtherUsers, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="btn-success" value="Add User" />
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Group.Users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@*<a href="@Url.Action("AddOrUpdate", "Questions", new { id = question.ID })">Edit</a>*@</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+

@@ -10,6 +10,6 @@ namespace Data.Models
 
         public string Description { get; set; }
 
-        public IEnumerable<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

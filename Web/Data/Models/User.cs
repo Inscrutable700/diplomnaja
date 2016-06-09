@@ -15,5 +15,9 @@ namespace Data.Models
         public string Email { get; set; }
 
         public UserType Type { get; set; }
+
+        public int? GroupID { get; set; }
+
+        public Group Group { get; set; }
     }
 }

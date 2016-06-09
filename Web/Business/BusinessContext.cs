@@ -16,6 +16,8 @@ namespace Business
 
         private QuestionManager questionManager;
 
+        private GroupManager groupManager;
+
         public BusinessContext()
         {
             this.repositoryContext = new RepositoryContext();
@@ -70,6 +72,19 @@ namespace Business
                 }
 
                 return this.questionManager;
+            }
+        }
+
+        public GroupManager GroupManager
+        {
+            get
+            {
+                if(this.groupManager == null)
+                {
+                    this.groupManager = new GroupManager(this.repositoryContext);
+                }
+
+                return this.groupManager;
             }
         }
 

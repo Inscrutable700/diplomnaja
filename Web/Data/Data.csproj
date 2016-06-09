@@ -62,9 +62,9 @@
     <Compile Include="Migrations\201606071316420_AddSomeTables.Designer.cs">
       <DependentUpon>201606071316420_AddSomeTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201606071715467_AddSomeTablesAgain.cs" />
-    <Compile Include="Migrations\201606071715467_AddSomeTablesAgain.Designer.cs">
-      <DependentUpon>201606071715467_AddSomeTablesAgain.cs</DependentUpon>
+    <Compile Include="Migrations\201606090825500_Some.cs" />
+    <Compile Include="Migrations\201606090825500_Some.Designer.cs">
+      <DependentUpon>201606090825500_Some.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicSubject.cs" />
@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AcademicSubjectRepository.cs" />
     <Compile Include="Repositories\AvailableAnswerRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
@@ -92,8 +93,8 @@
     <EmbeddedResource Include="Migrations\201606071316420_AddSomeTables.resx">
       <DependentUpon>201606071316420_AddSomeTables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606071715467_AddSomeTablesAgain.resx">
-      <DependentUpon>201606071715467_AddSomeTablesAgain.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606090825500_Some.resx">
+      <DependentUpon>201606090825500_Some.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

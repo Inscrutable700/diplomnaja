@@ -219,6 +219,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AcademicSubjectController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
@@ -235,6 +236,9 @@
     <Compile Include="ViewModels\AcademicSubject\AcademicSubjectListViewModel.cs" />
     <Compile Include="ViewModels\AcademicSubject\AcademicSubjectViewModel.cs" />
     <Compile Include="ViewModels\AcademicSubject\AddOrUpdateAcademicSubjectViewModel.cs" />
+    <Compile Include="ViewModels\Group\AddOrUpdateGroupViewModel.cs" />
+    <Compile Include="ViewModels\Group\GroupListViewModel.cs" />
+    <Compile Include="ViewModels\Group\GroupViewModel.cs" />
     <Compile Include="ViewModels\Question\AddOrUpdateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Question\AvailableAnswerViewModel.cs" />
     <Compile Include="ViewModels\Question\QuestionViewModel.cs" />
@@ -312,10 +316,11 @@
     <Content Include="Views\Tests\Index.cshtml" />
     <Content Include="Views\Tests\AddOrUpdate.cshtml" />
     <Content Include="Views\Questions\AddOrUpdate.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Groups\AddOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Question\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
