@@ -23,12 +23,14 @@ namespace Web.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Item(int userTestID, int? userQuestionID = null)
         {
             QuestionItemViewModel model = new QuestionItemViewModel();
             using (BusinessContext businessContext = new BusinessContext())
             {
                 User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
+                
                 Question[] questions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID);
                 Question userQuestion = null;
                 if (userQuestionID != null)
@@ -41,7 +43,9 @@ namespace Web.Controllers
                     userQuestion = questions.FirstOrDefault();
                 }
 
-                model.QuestionViewModel = Mapper.Map<QuestionViewModel>(userQuestion);
+                model.Question = Mapper.Map<QuestionViewModel>(userQuestion);
+                AvailableAnswer[] answers = businessContext.QuestionManager.GetAvailableAnswers(userQuestion.ID);
+                model.Question.AvailableAnswers = Mapper.Map<AvailableAnswerViewModel[]>(answers);
                 model.AllQuestions = questions.Select(q => new SelectListItem
                 {
                     Text = q.ID.ToString(),

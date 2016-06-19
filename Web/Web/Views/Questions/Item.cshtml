@@ -4,11 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-Question: @Model.QuestionViewModel.QuestionString
+Question: @Model.Question.QuestionString
 
 <form>
     <ul>
-        @foreach(var answer in Model.QuestionViewModel.AvailableAnswers)
+        @foreach(var answer in Model.Question.AvailableAnswers)
         {
             <li>
                 <input type="checkbox" name="answers" />

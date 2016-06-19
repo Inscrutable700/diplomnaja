@@ -5,6 +5,11 @@ namespace Data
 {
     public class DataContext : DbContext
     {
+        public DataContext()
+            : base("DefaultConnection")
+        {
+        }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<AcademicSubject> AcademicSubjects { get; set; }
