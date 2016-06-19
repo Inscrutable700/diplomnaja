@@ -12,6 +12,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
                 <td>@user.ID</td>
                 <td><a href="@Url.Action("Item", "User", new { id = user.ID })">@user.Name</a></td>
                 <td>@user.Email</td>
+                <td><a class="btn btn-info" href="@Url.Action("Tests", "User", new { userID = user.ID })">Tests</a></td>
             </tr>
         }
     </tbody>

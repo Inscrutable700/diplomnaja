@@ -5,8 +5,8 @@ namespace Business.Managers
 {
     public class AcademicSubjectManager : ManagerBase
     {
-        public AcademicSubjectManager(RepositoryContext repositoryContext)
-            : base(repositoryContext)
+        public AcademicSubjectManager(RepositoryContext repositoryContext, BusinessContext businessContext)
+            : base(repositoryContext, businessContext)
         {
         }
 

@@ -4,31 +4,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form class="form-horizontal" action="@Url.Action("AddOrUpdate", "AcademicSubject")" method="post">
-    @if (Model.IsUpdate)
-    {
-        <input type="hidden" name="id" value="@Model.AcademicSubject.ID" />
-    }
-    <div class="form-group">
-        <label class="col-md-2 control-label">Name</label>
-        <div class="col-md-10">
-            <input class="form-control" name="Name" required value="@Model.AcademicSubject.Name"/>
+<div class="panel-group">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#panelEdit">Edit</a>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Description</label>
-        <div class="col-md-10">
-            <textarea class="form-control" name="Description" required>@Model.AcademicSubject.Description</textarea>
+        <div id="panelEdit" class="collapse panel-collapse in">
+            <div class="panel-body">
+                <form class="form-horizontal" action="@Url.Action("AddOrUpdate", "AcademicSubject")" method="post">
+                    @if (Model.IsUpdate)
+                    {
+                        <input type="hidden" name="id" value="@Model.AcademicSubject.ID" />
+                    }
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input class="form-control" name="Name" required value="@Model.AcademicSubject.Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Description</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="Description" required>@Model.AcademicSubject.Description</textarea>
+                        </div>
+                    </div>
+
+                    @if (Model.IsUpdate)
+                    {
+                        <input type="submit" class="btn btn-success" value="Update" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-success" value="Add" />
+                    }
+
+                </form>
+            </div>
         </div>
     </div>
 
-    @if (Model.IsUpdate)
-    {
-        <input type="submit" class="btn-success" value="Update" />
-    }
-    else
-    {
-        <input type="submit" class="btn-success" value="Add" />
-    }
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#panelTests">Tests</a>
+        </div>
+        <div id="panelTests" class="collapse panel-collapse in">
+            <div class="panel-body">
+                @if (Model.IsUpdate)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var test in Model.Tests)
+                            {
+                                <tr>
+                                    <td>@test.Name</td>
+                                    <td>@test.Description</td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-</form>

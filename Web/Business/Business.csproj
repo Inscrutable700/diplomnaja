@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{c4c9c745-8978-4f67-ba2a-41cd608dfe56}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{23F4BFB4-80BD-4D7B-A17D-DE18E57C8E68}</Project>
       <Name>Data</Name>

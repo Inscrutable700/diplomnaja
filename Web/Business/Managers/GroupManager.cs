@@ -10,8 +10,8 @@ namespace Business.Managers
 {
     public class GroupManager : ManagerBase
     {
-        public GroupManager(RepositoryContext repositoryContext)
-            : base(repositoryContext)
+        public GroupManager(RepositoryContext repositoryContext, BusinessContext businessContext)
+            : base(repositoryContext, businessContext)
         {
         }
 
@@ -47,15 +47,23 @@ namespace Business.Managers
             this.repositoryContext.UserRepository.Update(user);
         }
 
-        public void AddTestToGroup(int groupID, int testID)
+        public void AddTestToGroup(int groupID, int testID, int questionsPerUser)
         {
-            var groupToTest = new GroupToTest
-            {
-                GroupID = groupID,
-                TestID = testID,
-            };
+            GroupToTest groupToTest = this.repositoryContext.GroupToTestRepository.Get(groupID, testID);
 
-            this.repositoryContext.GroupToTestRepository.Add(groupToTest);
+            if (groupToTest == null)
+            {
+                this.repositoryContext.GroupToTestRepository.Add(groupID, testID, questionsPerUser);
+                this.businessContext.UserManager.AssignTestToUsers(groupID, testID, questionsPerUser);
+            }
+        }
+
+
+
+        public Test[] GetTests(int groupID)
+        {
+            GroupToTest[] groupSubjects = this.repositoryContext.GroupToTestRepository.ListByGroup(groupID);
+            return groupSubjects.Select(gs => gs.Test).ToArray();
         }
     }
 }

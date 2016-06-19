@@ -40,6 +40,13 @@ namespace Data.Repositories
             return this.DataContext.Users.ToArray();
         }
 
+        public User[] ListByGroup(int groupID)
+        {
+            return this.DataContext.Users
+                .Where(u => u.GroupID == groupID)
+                .ToArray();
+        }
+
         public void Update(User entity)
         {
             this.DataContext.Entry(entity).State = EntityState.Modified;

@@ -14,9 +14,9 @@ namespace Data.Models
 
         public Test Test { get; set; }
 
-        public DateTime DateStart { get; set; }
+        public DateTime? DateStart { get; set; }
 
-        public DateTime DateEnd { get; set; }
+        public DateTime? DateEnd { get; set; }
 
         public int QuestionCount { get; set; }
     }

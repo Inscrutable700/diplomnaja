@@ -19,6 +19,8 @@ namespace Data
 
         public DbSet<GroupToTest> GroupToTests { get; set; }
 
-        public DbSet<UserToQuestion> UserToQuestions { get; set; }
+        public DbSet<UserTest> UserTests { get; set; }
+
+        public DbSet<UserTestAnswer> UserTestAnswers { get; set; }
     }
 }

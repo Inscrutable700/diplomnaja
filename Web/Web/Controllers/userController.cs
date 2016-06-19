@@ -38,5 +38,12 @@ namespace Web.Controllers
 
             return View(model);
         }
+
+        public ActionResult Tests(int userID)
+        {
+
+
+            return View();
+        }
     }
 }

@@ -9,5 +9,7 @@ namespace Web.ViewModels
         public bool IsUpdate { get; set; }
 
         public SelectListItem[] AllOtherUsers { get; set; }
+
+        public SelectListItem[] AllOtherTests { get; set; }
     }
 }

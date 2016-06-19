@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<a href="@Url.Action("AddOrUpdate", "Groups")" class="btn-success">Add new group</a>
+<a href="@Url.Action("AddOrUpdate", "Groups")" class="btn btn-success">Add new group</a>
 
 <table class="table table-striped">
     <thead>
@@ -21,7 +21,7 @@
             <tr>
                 <td>@group.ID</td>
                 <td><a href="@Url.Action("Item", "Groups", new { id = group.ID })">@group.Name</a></td>
-                <td><a href="@Url.Action("AddOrUpdate", "Groups", new { id = group.ID })">Edit</a></td>
+                <td><a class="btn btn-info" href="@Url.Action("AddOrUpdate", "Groups", new { id = group.ID })">Edit</a></td>
             </tr>
         }
     </tbody>

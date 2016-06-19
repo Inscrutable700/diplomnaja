@@ -21,6 +21,10 @@ namespace Data
 
         private GroupToTestRepository groupToTestRepository;
 
+        private UserTestRepository userTestRepository;
+
+        private UserTestAnswerRepository userTestAnswerRepository;
+
         public RepositoryContext()
         {
             this.dataContext = new DataContext();
@@ -114,6 +118,32 @@ namespace Data
                 }
 
                 return this.groupToTestRepository;
+            }
+        }
+
+        public UserTestRepository UserTestRepository
+        {
+            get
+            {
+                if (this.userTestRepository == null)
+                {
+                    this.userTestRepository = new UserTestRepository(this.dataContext);
+                }
+
+                return this.userTestRepository;
+            }
+        }
+         
+        public UserTestAnswerRepository UserTestAnswerRepository
+        {
+            get
+            {
+                if (this.userTestAnswerRepository == null)
+                {
+                    this.userTestAnswerRepository = new UserTestAnswerRepository(this.dataContext);
+                }
+
+                return this.userTestAnswerRepository;
             }
         }
 

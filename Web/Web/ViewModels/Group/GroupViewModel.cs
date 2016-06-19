@@ -7,5 +7,7 @@
         public string Name { get; set; }
 
         public UserViewModel[] Users { get; set; }
+
+        public TestViewModel[] Tests { get; set; }
     }
 }

@@ -5,62 +5,80 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form class="form-horizontal" action="@Url.Action("AddOrUpdate", "Tests")" method="post">
-    @if (Model.IsUpdate)
-    {
-        <input type="hidden" name="id" value="@Model.Test.ID" />
-    }
+<div class="panel-group">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#panelEdit">Edit</a>
+        </div>
+        <div id="panelEdit" class="collapse panel-collapse in">
+            <div class="panel-body">
+                <form class="form-horizontal" action="@Url.Action("AddOrUpdate", "Tests")" method="post">
+                    @if (Model.IsUpdate)
+                    {
+                        <input type="hidden" name="id" value="@Model.Test.ID" />
+                    }
 
-    <div class="form-group">
-        <label class="col-md-2 control-label">Academic Subject</label>
-        <div class="col-md-10">
-            @Html.DropDownList("academicSubjectID", Model.AcademicSubjects, new { @class = "form-control" })
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Academic Subject</label>
+                        <div class="col-md-10">
+                            @Html.DropDownList("academicSubjectID", Model.AcademicSubjects, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Name</label>
+                        <div class="col-md-10">
+                            <input class="form-control" name="Name" required value="@Model.Test.Name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Description</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="Description" required>@Model.Test.Description</textarea>
+                        </div>
+                    </div>
+
+                    @if (Model.IsUpdate)
+                    {
+                        <input type="submit" class="btn btn-success" value="Update" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-success" value="Add" />
+                    }
+
+                </form>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Name</label>
-        <div class="col-md-10">
-            <input class="form-control" name="Name" required value="@Model.Test.Name" />
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#panelQuestions">Questsions</a>
+        </div>
+        <div id="panelQuestions" class="collapse panel-collapse in">
+            <div class="panel-body">
+                <a href="@Url.Action("AddOrUpdate", "Questions", new { testID = Model.Test.ID })" class="btn btn-success">Add new question</a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Available answers</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var question in Model.Questions)
+                        {
+                            <tr>
+                                <td>@question.QuestionString</td>
+                                <td>Available answers</td>
+                                <td><a href="@Url.Action("AddOrUpdate", "Questions", new { id = question.ID })">Edit</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Description</label>
-        <div class="col-md-10">
-            <textarea class="form-control" name="Description" required>@Model.Test.Description</textarea>
-        </div>
-    </div>
+</div>
 
-    @if (Model.IsUpdate)
-    {
-        <input type="submit" class="btn-success" value="Update" />
-    }
-    else
-    {
-        <input type="submit" class="btn-success" value="Add" />
-    }
-
-</form>
-
-<hr />
-
-<a href="@Url.Action("AddOrUpdate", "Questions", new { testID = Model.Test.ID })" class="btn-success">Add new question</a>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Question</th>
-            <th>Available answers</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var question in Model.Questions)
-        {
-            <tr> 
-                <td>@question.QuestionString</td>
-                <td>Available answers</td>
-                <td><a href="@Url.Action("AddOrUpdate", "Questions", new { id = question.ID })">Edit</a></td>
-            </tr>
-        }
-    </tbody>
-</table>

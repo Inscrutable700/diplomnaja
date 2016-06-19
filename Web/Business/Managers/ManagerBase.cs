@@ -6,9 +6,12 @@ namespace Business.Managers
     {
         protected RepositoryContext repositoryContext;
 
-        public ManagerBase(RepositoryContext repositoryContext)
+        protected BusinessContext businessContext;
+
+        public ManagerBase(RepositoryContext repositoryContext, BusinessContext businessContext)
         {
             this.repositoryContext = repositoryContext;
+            this.businessContext = businessContext;
         }
     }
 }

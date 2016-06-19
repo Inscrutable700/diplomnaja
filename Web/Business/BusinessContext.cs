@@ -29,7 +29,7 @@ namespace Business
             {
                 if( this.userManager == null)
                 {
-                    this.userManager = new UserManager(this.repositoryContext);
+                    this.userManager = new UserManager(this.repositoryContext, this);
                 }
 
                 return this.userManager;
@@ -42,7 +42,7 @@ namespace Business
             {
                 if (this.academicSubjectManager == null)
                 {
-                    this.academicSubjectManager = new AcademicSubjectManager(this.repositoryContext);
+                    this.academicSubjectManager = new AcademicSubjectManager(this.repositoryContext, this);
                 }
 
                 return this.academicSubjectManager;
@@ -55,7 +55,7 @@ namespace Business
             {
                 if (this.testManager == null)
                 {
-                    this.testManager = new TestManager(this.repositoryContext);
+                    this.testManager = new TestManager(this.repositoryContext, this);
                 }
 
                 return this.testManager;
@@ -68,7 +68,7 @@ namespace Business
             {
                 if (this.questionManager == null)
                 {
-                    this.questionManager = new QuestionManager(this.repositoryContext);
+                    this.questionManager = new QuestionManager(this.repositoryContext, this);
                 }
 
                 return this.questionManager;
@@ -81,7 +81,7 @@ namespace Business
             {
                 if(this.groupManager == null)
                 {
-                    this.groupManager = new GroupManager(this.repositoryContext);
+                    this.groupManager = new GroupManager(this.repositoryContext, this);
                 }
 
                 return this.groupManager;

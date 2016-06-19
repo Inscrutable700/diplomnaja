@@ -10,8 +10,6 @@ namespace Web.Controllers
     {
         public AcademicSubjectController()
         {
-            Mapper.CreateMap<AcademicSubject, AcademicSubjectViewModel>();
-            Mapper.CreateMap<AcademicSubjectViewModel, AcademicSubject>();
         }
 
         // GET: AcademicSubject
@@ -39,6 +37,9 @@ namespace Web.Controllers
                 {
                     AcademicSubject subject = businessContext.AcademicSubjectManager.GetAcademicSubject(id.Value);
                     model.AcademicSubject = Mapper.Map(subject, model.AcademicSubject);
+
+                    Test[] tests = businessContext.TestManager.GetTests(id.Value);
+                    model.Tests = Mapper.Map<TestViewModel[]>(tests);
                 }
 
                 model.IsUpdate = true;

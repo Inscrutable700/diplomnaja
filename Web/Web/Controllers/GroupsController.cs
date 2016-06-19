@@ -43,16 +43,21 @@ namespace Web.Controllers
             using(BusinessContext businessContext = new BusinessContext())
             {
                 User[] allUsers = businessContext.UserManager.GetUsers();
+                Test[] allTests = businessContext.TestManager.GetTests();
 
                 if (id != null)
                 {
                     Group group = businessContext.GroupManager.GetGroup(id.Value);
                     model.Group = Mapper.Map(group, model.Group);
                     allUsers = allUsers.Union(group.Users).ToArray();
+                    Test[] tests = businessContext.GroupManager.GetTests(id.Value);
+                    model.Group.Tests = Mapper.Map<TestViewModel[]>(tests);
+                    allTests = allTests.Union(tests).ToArray();
                     model.IsUpdate = true;
                 }
 
                 model.AllOtherUsers = Mapper.Map<SelectListItem[]>(allUsers);
+                model.AllOtherTests = Mapper.Map<SelectListItem[]>(allTests);
             }
             
             return View(model);
@@ -83,6 +88,16 @@ namespace Web.Controllers
             using (BusinessContext businessContext = new BusinessContext())
             {
                 businessContext.GroupManager.AddUserToGroup(groupID, userID);
+            }
+
+            return RedirectToAction("AddOrUpdate", new { id = groupID });
+        }
+
+        public ActionResult AddTestToGroup(int groupID, int testID, int questionsPerUser)
+        {
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                businessContext.GroupManager.AddTestToGroup(groupID, testID, questionsPerUser);
             }
 
             return RedirectToAction("AddOrUpdate", new { id = groupID });

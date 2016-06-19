@@ -5,8 +5,8 @@ namespace Business.Managers
 {
     public class TestManager : ManagerBase
     {
-        public TestManager(RepositoryContext repositoryContext)
-            : base(repositoryContext)
+        public TestManager(RepositoryContext repositoryContext, BusinessContext businessContext)
+            : base(repositoryContext, businessContext)
         {
         }
 
@@ -23,6 +23,11 @@ namespace Business.Managers
         public Test[] GetTests()
         {
             return this.repositoryContext.TestRepository.List();
+        }
+
+        public Test[] GetTests(int subjectID)
+        {
+            return this.repositoryContext.TestRepository.List(subjectID);
         }
 
         public void UpdateTest(Test test)

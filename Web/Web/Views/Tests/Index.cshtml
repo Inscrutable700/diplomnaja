@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<a href="@Url.Action("AddOrUpdate", "Tests")" class="btn-success">Add new test</a>
+<a href="@Url.Action("AddOrUpdate", "Tests")" class="btn btn-success">Add new test</a>
 
 <table class="table table-striped">
     <thead>
@@ -22,7 +22,7 @@
                 <td>@test.ID</td>
                 <td><a href="@Url.Action("Item", "Tests", new { id = test.ID })">@test.Name</a></td>
                 <td>@test.Description</td>
-                <td><a href="@Url.Action("AddOrUpdate", "Tests", new { id = test.ID })">Edit</a></td>
+                <td><a href="@Url.Action("AddOrUpdate", "Tests", new { id = test.ID })" class="btn btn-info">Edit</a></td>
             </tr>
         }
     </tbody>

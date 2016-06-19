@@ -66,6 +66,14 @@
     <Compile Include="Migrations\201606090825500_Some.Designer.cs">
       <DependentUpon>201606090825500_Some.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606182224543_AddGroupToTestsTable.cs" />
+    <Compile Include="Migrations\201606182224543_AddGroupToTestsTable.Designer.cs">
+      <DependentUpon>201606182224543_AddGroupToTestsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606182238497_AddUserTestTable.cs" />
+    <Compile Include="Migrations\201606182238497_AddUserTestTable.Designer.cs">
+      <DependentUpon>201606182238497_AddUserTestTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicSubject.cs" />
     <Compile Include="Models\AvailableAnswer.cs" />
@@ -74,7 +82,8 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserToQuestion.cs" />
+    <Compile Include="Models\UserTest.cs" />
+    <Compile Include="Models\UserTestAnswer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AcademicSubjectRepository.cs" />
     <Compile Include="Repositories\GroupToTestRepository.cs" />
@@ -85,6 +94,8 @@
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\TestRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserTestAnswerRepository.cs" />
+    <Compile Include="Repositories\UserTestRepository.cs" />
     <Compile Include="RepositoryContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +107,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606090825500_Some.resx">
       <DependentUpon>201606090825500_Some.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606182224543_AddGroupToTestsTable.resx">
+      <DependentUpon>201606182224543_AddGroupToTestsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606182238497_AddUserTestTable.resx">
+      <DependentUpon>201606182238497_AddUserTestTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,8 +6,8 @@ namespace Business.Managers
 {
     public class QuestionManager : ManagerBase
     {
-        public QuestionManager(RepositoryContext repositoryContext)
-            : base(repositoryContext)
+        public QuestionManager(RepositoryContext repositoryContext, BusinessContext businessContext)
+            : base(repositoryContext, businessContext)
         {
         }
 
