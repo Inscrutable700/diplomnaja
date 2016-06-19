@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessContext.cs" />
+    <Compile Include="Dto\UserTestsDto.cs" />
     <Compile Include="Managers\AcademicSubjectManager.cs" />
     <Compile Include="Managers\GroupManager.cs" />
     <Compile Include="Managers\QuestionManager.cs" />

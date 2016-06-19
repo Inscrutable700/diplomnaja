@@ -14,8 +14,14 @@ namespace Data.Models
 
         public Test Test { get; set; }
 
+        public int GroupToTestID { get; set; }
+
+        public GroupToTest GroupToTest { get; set; }
+
         public DateTime DateAssigned { get; set; }
 
         public DateTime? DateCompleted { get; set; }
+
+        public bool IsCompleted { get; set; }
     }
 }

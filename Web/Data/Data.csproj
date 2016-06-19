@@ -74,6 +74,14 @@
     <Compile Include="Migrations\201606182238497_AddUserTestTable.Designer.cs">
       <DependentUpon>201606182238497_AddUserTestTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606191034161_AddForeignForUserTestToGroupTest.cs" />
+    <Compile Include="Migrations\201606191034161_AddForeignForUserTestToGroupTest.Designer.cs">
+      <DependentUpon>201606191034161_AddForeignForUserTestToGroupTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606191109477_test.cs" />
+    <Compile Include="Migrations\201606191109477_test.Designer.cs">
+      <DependentUpon>201606191109477_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicSubject.cs" />
     <Compile Include="Models\AvailableAnswer.cs" />
@@ -113,6 +121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606182238497_AddUserTestTable.resx">
       <DependentUpon>201606182238497_AddUserTestTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606191034161_AddForeignForUserTestToGroupTest.resx">
+      <DependentUpon>201606191034161_AddForeignForUserTestToGroupTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606191109477_test.resx">
+      <DependentUpon>201606191109477_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

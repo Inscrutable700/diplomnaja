@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using AutoMapper;
+using Business;
+using Business.Dto;
+using Data.Models;
 using System.Web.Mvc;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -10,7 +11,17 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HomeViewModel model = new HomeViewModel();
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
+                UserTestsDto userTests = businessContext.UserManager.GetUserTests(user.ID);
+                model.AvailableTests = Mapper.Map<UserTestViewModel[]>(userTests.AvailableTests);
+                model.PassedTests = Mapper.Map<UserTestViewModel[]>(userTests.PassedTests);
+                model.FutureTests = Mapper.Map<UserTestViewModel[]>(userTests.FutureTests);
+            }
+
+            return View(model);
         }
 
         public ActionResult About()

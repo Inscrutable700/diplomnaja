@@ -96,14 +96,25 @@
                         <input type="hidden" name="groupID" value="@Model.Group.ID" />
                         <div class="form-group">
                             <label class="col-md-1 control-label">Test:</label>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 @Html.DropDownList("testID", Model.AllOtherTests, new { @class = "form-control" })
                             </div>
-                            <label class="col-md-2 control-label">Per User Count:</label>
+
+                            <label class="col-md-1 control-label">Count:</label>
                             <div class="col-md-1">
                                 <input type="number" name="questionsPerUser" class="form-control" value="1" min="1" max="100" />
                             </div>
                             
+                            <label class="col-md-1 control-label">Start:</label>
+                            <div class="col-md-3">
+                                <input type="datetime-local" name="dateStart" class="form-control" />
+                            </div>
+
+                            <label class="col-md-1 control-label">End:</label>
+                            <div class="col-md-3">
+                                <input type="datetime-local" name="dateEnd" class="form-control" />
+                            </div>
+
                             <input type="submit" class="btn btn-success col-md-2" value="Add Test" />
                         </div>
                     </form>
@@ -132,7 +143,6 @@
         </div>
     </div>
 </div>
-
 
 
 

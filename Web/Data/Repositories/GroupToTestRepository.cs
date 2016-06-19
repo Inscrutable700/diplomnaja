@@ -15,7 +15,7 @@ namespace Data.Repositories
         {
         }
 
-        public GroupToTest Add(int groupID, int testID, int questionsPerUser)
+        public GroupToTest Add(int groupID, int testID, int questionsPerUser, DateTime? dateStart, DateTime? dateEnd)
         {
             GroupToTest entity = this.DataContext.GroupToTests
                 .FirstOrDefault(gt => gt.GroupID == groupID && gt.TestID == testID);
@@ -30,6 +30,8 @@ namespace Data.Repositories
                 GroupID = groupID,
                 TestID = testID,
                 QuestionCount = questionsPerUser,
+                DateStart = dateStart,
+                DateEnd = dateEnd,
             };
 
             entity = this.DataContext.GroupToTests.Add(entity);

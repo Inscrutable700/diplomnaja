@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Business;
 using Data.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using Web.ViewModels;
@@ -93,11 +94,11 @@ namespace Web.Controllers
             return RedirectToAction("AddOrUpdate", new { id = groupID });
         }
 
-        public ActionResult AddTestToGroup(int groupID, int testID, int questionsPerUser)
+        public ActionResult AddTestToGroup(int groupID, int testID, int questionsPerUser, DateTime? dateStart, DateTime? dateEnd)
         {
             using (BusinessContext businessContext = new BusinessContext())
             {
-                businessContext.GroupManager.AddTestToGroup(groupID, testID, questionsPerUser);
+                businessContext.GroupManager.AddTestToGroup(groupID, testID, questionsPerUser, dateStart, dateEnd);
             }
 
             return RedirectToAction("AddOrUpdate", new { id = groupID });

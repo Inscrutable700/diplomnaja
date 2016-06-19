@@ -84,5 +84,17 @@ namespace Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Item(int userTestID)
+        {
+            TestItemViewModel model = new TestItemViewModel();
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                UserTest userTest = businessContext.UserManager.GetUserTest(userTestID);
+                model.UserTest = Mapper.Map<UserTestViewModel>(userTest);
+            }
+
+            return View(model);
+        }
     }
 }

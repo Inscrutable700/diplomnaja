@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Web.ViewModels.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -11,17 +12,29 @@
 <div class="row">
     <div class="col-md-4">
         <h2>Your today tests</h2>
-        
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <ul>
+            @foreach(var test in Model.AvailableTests)
+            {
+                <li><a href="@Url.Action("Item", "Tests", new { userTestID = test.ID })">@test.Name</a> (@test.DateStart - @test.DateEnd)</li>
+            }
+        </ul>
     </div>
     <div class="col-md-4">
         <h2>Your passed tests</h2>
-        
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <ul>
+            @foreach (var test in Model.PassedTests)
+            {
+                <li><a href="@Url.Action("Item", "Tests", new { userTestID = test.ID })">@test.Name</a> (@test.DateStart - @test.DateEnd)</li>
+            }
+        </ul>
     </div>
     <div class="col-md-4">
         <h2>Your future tests</h2>
-        
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <ul>
+            @foreach (var test in Model.FutureTests)
+            {
+                <li><a href="@Url.Action("Item", "Tests", new { id = test.ID })">@test.Name</a> (@test.DateStart - @test.DateEnd)</li>
+            }
+        </ul>
     </div>
 </div>

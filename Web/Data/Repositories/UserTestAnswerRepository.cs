@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,6 +39,14 @@ namespace Data.Repositories
         public UserTestAnswer[] List()
         {
             throw new NotImplementedException();
+        }
+
+        public UserTestAnswer[] List(int userTestID)
+        {
+            return this.DataContext.UserTestAnswers
+                .Include(uta => uta.Question)
+                .Where(uta => uta.UserTestID == userTestID)
+                .ToArray();
         }
 
         public void Update(UserTestAnswer entity)

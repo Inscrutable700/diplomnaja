@@ -1,0 +1,24 @@
+﻿@model Web.ViewModels.QuestionItemViewModel
+@{
+    ViewBag.Title = "Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+Question: @Model.QuestionViewModel.QuestionString
+
+<form>
+    <ul>
+        @foreach(var answer in Model.QuestionViewModel.AvailableAnswers)
+        {
+            <li>
+                <input type="checkbox" name="answers" />
+                @answer.AnswerString
+            </li>
+        }
+    </ul>
+
+    <input type="submit" class="btn btn-success" value="Answer" />
+</form>
+
+
+

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,10 +14,10 @@ namespace Data.Repositories
         {
         }
 
-        public UserTest Add(int userID, int testID)
+        public UserTest Add(int userID, int testID, int groupToTestID)
         {
             UserTest userTest = this.DataContext.UserTests
-                .SingleOrDefault(ut => ut.UserID == userID && testID == testID);
+                .SingleOrDefault(ut => ut.UserID == userID && ut.TestID == testID);
             if (userTest!= null)
             {
                 return userTest;
@@ -26,6 +27,7 @@ namespace Data.Repositories
             {
                 UserID = userID,
                 TestID = testID,
+                GroupToTestID = groupToTestID,
                 DateAssigned = DateTime.UtcNow,
             };
 
@@ -53,12 +55,26 @@ namespace Data.Repositories
 
         public UserTest Get(int id)
         {
-            throw new NotImplementedException();
+            return this.DataContext.UserTests
+                .Include(ut => ut.Test)
+                .Include(ut => ut.GroupToTest)
+                .Include(ut => ut.User)
+                .SingleOrDefault(ut => ut.ID == id);
         }
 
         public UserTest[] List()
         {
             throw new NotImplementedException();
+        }
+
+        public UserTest[] ListByUser(int userID)
+        {
+            return this.DataContext.UserTests
+                .Include(ut => ut.Test)
+                .Include(ut => ut.GroupToTest)
+                .Include(ut => ut.User)
+                .Where(ut => ut.UserID == userID)
+                .ToArray();
         }
 
         public void Update(UserTest entity)

@@ -3,6 +3,7 @@ using AutoMapper;
 using Business;
 using Data.Models;
 using Web.ViewModels;
+using System.Linq;
 
 namespace Web.Controllers
 {
@@ -20,6 +21,37 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Item(int userTestID, int? userQuestionID = null)
+        {
+            QuestionItemViewModel model = new QuestionItemViewModel();
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
+                Question[] questions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID);
+                Question userQuestion = null;
+                if (userQuestionID != null)
+                {
+                    userQuestion = businessContext.UserManager
+                        .GetUserQuestion(user.ID, userTestID, userQuestionID.Value);
+                }
+                else
+                {
+                    userQuestion = questions.FirstOrDefault();
+                }
+
+                model.QuestionViewModel = Mapper.Map<QuestionViewModel>(userQuestion);
+                model.AllQuestions = questions.Select(q => new SelectListItem
+                {
+                    Text = q.ID.ToString(),
+                    Value = q.ID.ToString(),
+                    Selected = q.ID == userQuestion.ID,
+                })
+                .ToArray();
+            }
+
+            return View(model);
         }
 
         public ActionResult AddOrUpdate(int? testID = null, int? id = null)

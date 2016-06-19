@@ -230,7 +230,9 @@
     </Compile>
     <Compile Include="MappingProfiles\AcademicSubjectProfile.cs" />
     <Compile Include="MappingProfiles\ProfileBase.cs" />
+    <Compile Include="MappingProfiles\QuestionProfile.cs" />
     <Compile Include="MappingProfiles\TestProfile.cs" />
+    <Compile Include="MappingProfiles\UserProfile.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -242,14 +244,18 @@
     <Compile Include="ViewModels\Group\AddOrUpdateGroupViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupListViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\Question\AddOrUpdateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Question\AvailableAnswerViewModel.cs" />
+    <Compile Include="ViewModels\Question\QuestionItemViewModel.cs" />
     <Compile Include="ViewModels\Question\QuestionViewModel.cs" />
     <Compile Include="ViewModels\Test\AddOrUpdateTestViewModel.cs" />
+    <Compile Include="ViewModels\Test\TestItemViewModel.cs" />
     <Compile Include="ViewModels\Test\TestListViewModel.cs" />
     <Compile Include="ViewModels\Test\TestViewModel.cs" />
     <Compile Include="ViewModels\User\UserItemViewModel.cs" />
     <Compile Include="ViewModels\User\UserListViewModel.cs" />
+    <Compile Include="ViewModels\User\UserTestViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +328,8 @@
     <Content Include="Views\Groups\Index.cshtml" />
     <Content Include="Views\Groups\AddOrUpdate.cshtml" />
     <Content Include="Views\User\Tests.cshtml" />
+    <Content Include="Views\Tests\Item.cshtml" />
+    <Content Include="Views\Questions\Item.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

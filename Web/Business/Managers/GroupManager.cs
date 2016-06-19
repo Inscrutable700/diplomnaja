@@ -47,14 +47,14 @@ namespace Business.Managers
             this.repositoryContext.UserRepository.Update(user);
         }
 
-        public void AddTestToGroup(int groupID, int testID, int questionsPerUser)
+        public void AddTestToGroup(int groupID, int testID, int questionsPerUser, DateTime? dateStart, DateTime? dateEnd)
         {
             GroupToTest groupToTest = this.repositoryContext.GroupToTestRepository.Get(groupID, testID);
 
             if (groupToTest == null)
             {
-                this.repositoryContext.GroupToTestRepository.Add(groupID, testID, questionsPerUser);
-                this.businessContext.UserManager.AssignTestToUsers(groupID, testID, questionsPerUser);
+                groupToTest = this.repositoryContext.GroupToTestRepository.Add(groupID, testID, questionsPerUser, dateStart, dateEnd);
+                this.businessContext.UserManager.AssignTestToUsers(groupID, testID, groupToTest);
             }
         }
 

@@ -35,6 +35,13 @@ namespace Data.Repositories
             return this.DataContext.Users.SingleOrDefault(u => u.ID == id);
         }
 
+        public User Get(string email)
+        {
+            return this.DataContext.Users
+                .SingleOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+        }
+
+
         public User[] List()
         {
             return this.DataContext.Users.ToArray();

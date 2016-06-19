@@ -1,0 +1,14 @@
+﻿@model Web.ViewModels.TestItemViewModel
+@{
+    ViewBag.Title = "Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.UserTest.Name</h2>
+
+<h3>@Model.UserTest.Description</h3>
+
+<a href="@Url.Action("Item", "Questions", new { userTestID = Model.UserTest.ID })">Pass the test</a>
+
+
+
