@@ -33,7 +33,19 @@ namespace Data.Repositories
 
         public UserTestAnswer Get(int id)
         {
-            throw new NotImplementedException();
+            return this.DataContext.UserTestAnswers
+                .Include(uta => uta.Question)
+                .SingleOrDefault(uta => uta.ID == id);
+        }
+
+        public UserTestAnswer GetNext(int userTestID, int id)
+        {
+            return this.DataContext.UserTestAnswers
+                .Include(uta => uta.Question)
+                .Where(uta => uta.UserTestID == userTestID)
+                .Where(uta => uta.QuestionID > id)
+                .OrderBy(uta => uta.ID)
+                .FirstOrDefault();
         }
 
         public UserTestAnswer[] List()
@@ -45,6 +57,7 @@ namespace Data.Repositories
         {
             return this.DataContext.UserTestAnswers
                 .Include(uta => uta.Question)
+                .Include(uta => uta.Answer)
                 .Where(uta => uta.UserTestID == userTestID)
                 .ToArray();
         }

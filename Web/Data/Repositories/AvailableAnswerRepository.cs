@@ -38,7 +38,7 @@ namespace Data.Repositories
 
         public AvailableAnswer Get(int id)
         {
-            throw new NotImplementedException();
+            return this.DataContext.AvailableAnswer.SingleOrDefault(aa => aa.ID == id);
         }
 
         public AvailableAnswer[] List()

@@ -66,5 +66,10 @@ namespace Business.Managers
         {
             return this.repositoryContext.AvailableAnswerRepository.List(questionID);
         }
+
+        public AvailableAnswer GetAvailableAnswer(int availableAnswerID)
+        {
+            return this.repositoryContext.AvailableAnswerRepository.Get(availableAnswerID);
+        }
     }
 }

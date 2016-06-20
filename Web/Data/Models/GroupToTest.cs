@@ -19,5 +19,7 @@ namespace Data.Models
         public DateTime? DateEnd { get; set; }
 
         public int QuestionCount { get; set; }
+
+        public int PointsForComplete { get; set; }
     }
 }

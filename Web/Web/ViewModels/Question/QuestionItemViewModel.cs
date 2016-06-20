@@ -9,5 +9,7 @@ namespace Web.ViewModels
         public SelectListItem[] AllQuestions { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public int UserTestID { get; set; }
     }
 }

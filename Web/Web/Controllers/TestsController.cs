@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using AutoMapper;
 using Business;
 using Data.Models;
@@ -95,6 +97,49 @@ namespace Web.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult Result(int userTestID)
+        {
+            TestResultViewModel model = new TestResultViewModel(); 
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
+                UserTest userTest = businessContext.UserManager.GetUserTest(userTestID);
+                UserTestAnswer[] userQuestions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID);
+                model.Test = Mapper.Map<TestViewModel>(userTest.Test);
+                model.Points = (int)Math.Round(userTest.Points);
+
+                List<TestResultViewModel.UserAnswer> answers = new List<TestResultViewModel.UserAnswer>();
+                foreach (UserTestAnswer userTestAnswer in userQuestions)
+                {
+                    AvailableAnswer rightAnswer = businessContext.QuestionManager.GetAvailableAnswer(userTestAnswer.Question.RightAnswerID);
+                    answers.Add(new TestResultViewModel.UserAnswer
+                    {
+                        Answer = Mapper.Map<AvailableAnswerViewModel>(userTestAnswer.Answer),
+                        IsCorrect = userTestAnswer.QuestionID == userTestAnswer.Question.RightAnswerID,
+                        Points = userTestAnswer.Points,
+                        Question = Mapper.Map<QuestionViewModel>(userTestAnswer.Question),
+                        RightAnswer = Mapper.Map<AvailableAnswerViewModel>(rightAnswer),
+                    });
+                }
+
+                model.Answers = answers.ToArray();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult FinishTest(int userTestID)
+        {
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
+                businessContext.TestManager.Finish(user.ID, userTestID);
+            }
+
+            return this.RedirectToAction("Result", new { userTestID = userTestID });
         }
     }
 }

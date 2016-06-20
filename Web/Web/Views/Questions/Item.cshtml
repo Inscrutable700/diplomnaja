@@ -4,21 +4,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-Question: @Model.Question.QuestionString
+@if (Model.IsCompleted)
+{
+    <h1>Тест вже пройдено</h1>
+    <a class="btn btn-success" href="@Url.Action("Result", "Tests", new { userTestID = Model.UserTestID })">Результат</a>
+}
+else
+{
+    <span>Питання:</span> @Model.Question.QuestionString
 
-<form>
-    <ul>
-        @foreach(var answer in Model.Question.AvailableAnswers)
-        {
-            <li>
-                <input type="checkbox" name="answers" />
-                @answer.AnswerString
-            </li>
-        }
-    </ul>
+    <form action="@Url.Action("Answer", "Questions")" method="post">
+        <input type="hidden" name="userQuestionID" value="@Model.Question.ID" />
+        <input type="hidden" name="userTestID" value="@Model.UserTestID" />
+        <ul class="list-group">
+            @foreach (var answer in Model.Question.AvailableAnswers)
+            {
+                <li class="list-group-item">
+                    <input type="radio" name="availableAnswerID" value="@answer.ID" />
+                    @answer.AnswerString
+                </li>
+            }
+        </ul>
 
-    <input type="submit" class="btn btn-success" value="Answer" />
-</form>
+        <input type="submit" class="btn btn-success" value="Відповісти" />
+        <a class="btn btn-info" href="@Url.Action("NextItem", "Questions", new { userTestID = Model.UserTestID, userQuestionID = Model.Question.ID})">Наступний</a>
+
+    </form>
+    <br />
+    <form action="@Url.Action("FinishTest", "Tests")" method="post">
+        <input type="hidden" name="userTestID" value="@Model.UserTestID" />
+        <input class="btn btn-danger" type="submit" value="Завершити тест" />
+    </form>
+}
 
 
 

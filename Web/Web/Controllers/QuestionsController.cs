@@ -27,12 +27,14 @@ namespace Web.Controllers
         public ActionResult Item(int userTestID, int? userQuestionID = null)
         {
             QuestionItemViewModel model = new QuestionItemViewModel();
+            model.UserTestID = userTestID;
             using (BusinessContext businessContext = new BusinessContext())
             {
                 User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
-                
-                Question[] questions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID);
-                Question userQuestion = null;
+                UserTest userTest = businessContext.UserManager.GetUserTest(userTestID);
+                model.IsCompleted = userTest.IsCompleted;
+                UserTestAnswer[] questions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID);
+                UserTestAnswer userQuestion = null;
                 if (userQuestionID != null)
                 {
                     userQuestion = businessContext.UserManager
@@ -43,8 +45,8 @@ namespace Web.Controllers
                     userQuestion = questions.FirstOrDefault();
                 }
 
-                model.Question = Mapper.Map<QuestionViewModel>(userQuestion);
-                AvailableAnswer[] answers = businessContext.QuestionManager.GetAvailableAnswers(userQuestion.ID);
+                model.Question = Mapper.Map<QuestionViewModel>(userQuestion.Question);
+                AvailableAnswer[] answers = businessContext.QuestionManager.GetAvailableAnswers(userQuestion.Question.ID);
                 model.Question.AvailableAnswers = Mapper.Map<AvailableAnswerViewModel[]>(answers);
                 model.AllQuestions = questions.Select(q => new SelectListItem
                 {
@@ -58,14 +60,32 @@ namespace Web.Controllers
             return View(model);
         }
 
-        public ActionResult Answer(int userQuestionID, int availableAnswerID)
+        public ActionResult NextItem(int userTestID, int? userQuestionID = null)
+        {
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
+                UserTestAnswer question = businessContext.UserManager
+                    .GetNextUserQuestion(user.ID, userTestID, userQuestionID.Value);
+
+                if(question == null)
+                {
+                    return this.RedirectToAction("Item", "Tests", new { userTestID = userTestID });
+                }
+
+                return this.RedirectToAction("Item", new { userTestID = userTestID, userQuestionID = question.ID });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Answer(int userTestID, int userQuestionID, int availableAnswerID)
         {
             using (BusinessContext businessContext = new BusinessContext())
             {
                 businessContext.UserManager.AnswerQuestion(userQuestionID, availableAnswerID);
             }
 
-            return this.View();
+            return this.RedirectToAction("NextItem", new { userTestID = userTestID, userQuestionID = userQuestionID });
         }
 
         public ActionResult AddOrUpdate(int? testID = null, int? id = null)
@@ -104,7 +124,7 @@ namespace Web.Controllers
         {
             if (model == null || model.AvailableAnswers == null || model.AvailableAnswers.Length <= 0)
             {
-                return this.Content("Vse hernja");
+                return this.Content("Error");
             }
 
             using (BusinessContext businessContext = new BusinessContext())

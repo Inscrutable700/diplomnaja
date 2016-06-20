@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using Data.Models;
 
 namespace Business.Managers
@@ -33,6 +34,42 @@ namespace Business.Managers
         public void UpdateTest(Test test)
         {
             this.repositoryContext.TestRepository.Update(test);
+        }
+
+        public void Finish(int userID, int userTestID)
+        {
+            UserTest userTest = this.repositoryContext.UserTestRepository.Get(userTestID);
+            if(userTest.UserID != userID)
+            {
+                return;
+            }
+
+            UserTestAnswer[] userAnswers = this.repositoryContext.UserTestAnswerRepository.List(userTestID);
+            double pointsPerQuestion = userTest.GroupToTest.PointsForComplete / userAnswers.Length;
+            double testPoints = 0;
+            foreach(UserTestAnswer userTestAnswer in userAnswers)
+            {
+                if (userTestAnswer.DateCompleted != null)
+                {
+                    if (userTestAnswer.AnswerID == userTestAnswer.Question.RightAnswerID)
+                    {
+                        userTestAnswer.Points = pointsPerQuestion;
+                        testPoints += pointsPerQuestion;
+                    }
+                    else
+                    {
+                        userTestAnswer.Points = -pointsPerQuestion;
+                        testPoints -= pointsPerQuestion;
+                    }
+
+                    this.repositoryContext.UserTestAnswerRepository.Update(userTestAnswer);
+                }
+            }
+
+            userTest.Points = testPoints;
+            userTest.DateCompleted = DateTime.UtcNow;
+            userTest.IsCompleted = true;
+            this.repositoryContext.UserTestRepository.Update(userTest);
         }
     }
 }

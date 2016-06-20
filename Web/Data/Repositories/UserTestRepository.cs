@@ -58,6 +58,7 @@ namespace Data.Repositories
             return this.DataContext.UserTests
                 .Include(ut => ut.Test)
                 .Include(ut => ut.GroupToTest)
+                .Include(ut => ut.GroupToTest.Group)
                 .Include(ut => ut.User)
                 .SingleOrDefault(ut => ut.ID == id);
         }
@@ -79,7 +80,8 @@ namespace Data.Repositories
 
         public void Update(UserTest entity)
         {
-            throw new NotImplementedException();
+            this.DataContext.Entry(entity).State = EntityState.Modified;
+            this.DataContext.SaveChanges();
         }
 
         UserTest IRepository<UserTest>.Add(UserTest entity)

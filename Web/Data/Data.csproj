@@ -86,6 +86,10 @@
     <Compile Include="Migrations\201606201329269_AddSomething.Designer.cs">
       <DependentUpon>201606201329269_AddSomething.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606201736009_addBBB.cs" />
+    <Compile Include="Migrations\201606201736009_addBBB.Designer.cs">
+      <DependentUpon>201606201736009_addBBB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AcademicSubject.cs" />
     <Compile Include="Models\AvailableAnswer.cs" />
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606201329269_AddSomething.resx">
       <DependentUpon>201606201329269_AddSomething.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606201736009_addBBB.resx">
+      <DependentUpon>201606201736009_addBBB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

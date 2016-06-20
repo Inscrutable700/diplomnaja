@@ -8,7 +8,14 @@
 
 <h3>@Model.UserTest.Description</h3>
 
-<a href="@Url.Action("Item", "Questions", new { userTestID = Model.UserTest.ID })">Pass the test</a>
+<a class="btn btn-success" href="@Url.Action("Item", "Questions", new { userTestID = Model.UserTest.ID })">Пройти тест</a>
+<a class="btn btn-success" href="@Url.Action("Result", "Tests", new { userTestID = Model.UserTest.ID })">Результат</a>
+<br />
+<br />
+<form action="@Url.Action("FinishTest", "Tests")" method="post">
+    <input type="hidden" name="userTestID" value="@Model.UserTest.ID" />
+    <input class="btn btn-danger" type="submit" value="Завершити тест" />
+</form>
 
 
 

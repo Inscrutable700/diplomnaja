@@ -252,6 +252,7 @@
     <Compile Include="ViewModels\Test\AddOrUpdateTestViewModel.cs" />
     <Compile Include="ViewModels\Test\TestItemViewModel.cs" />
     <Compile Include="ViewModels\Test\TestListViewModel.cs" />
+    <Compile Include="ViewModels\Test\TestResultViewModel.cs" />
     <Compile Include="ViewModels\Test\TestViewModel.cs" />
     <Compile Include="ViewModels\User\UserItemViewModel.cs" />
     <Compile Include="ViewModels\User\UserListViewModel.cs" />
@@ -333,6 +334,7 @@
     <Content Include="Views\User\Tests.cshtml" />
     <Content Include="Views\Tests\Item.cshtml" />
     <Content Include="Views\Questions\Item.cshtml" />
+    <Content Include="Views\Tests\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

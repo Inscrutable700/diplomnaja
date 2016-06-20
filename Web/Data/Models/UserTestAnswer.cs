@@ -23,5 +23,7 @@ namespace Data.Models
         public DateTime DateAssigned { get; set; }
 
         public DateTime? DateCompleted { get; set; }
+
+        public double Points { get; set; }
     }
 }

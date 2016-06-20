@@ -1,0 +1,55 @@
+﻿@model Web.ViewModels.TestResultViewModel
+@{
+    ViewBag.Title = "Результат тесту";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Результат</h2>
+
+<div class="panel-group">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#panelEdit">Результат тесту</a>
+        </div>
+        <div id="panelEdit" class="collapse panel-collapse in">
+            <div class="panel-body">
+                Тест: @Model.Test.Name
+                <br />
+                Опис: @Model.Test.Description
+                <br />
+                Бали: @Model.Points
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <a data-toggle="collapse" href="#panelQuestions">Відповіді</a>
+        </div>
+        <div id="panelQuestions" class="collapse panel-collapse in">
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Питання</th>
+                            <th>Правильна відповідь</th>
+                            <th>Ваша відповідь</th>
+                            <th>Бали</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var answer in Model.Answers)
+                        {
+                            <tr>
+                                <td>@answer.Question.QuestionString</td>
+                                <td>@answer.RightAnswer.AnswerString</td>
+                                <td>@answer.Answer.AnswerString</td>
+                                <td>@answer.Points</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

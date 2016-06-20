@@ -107,17 +107,22 @@ namespace Business.Managers
             return randomQuestions.ToArray();
         }
 
-        public Question GetUserQuestion(int userID, int userTestID, int userAnswerID)
+        public UserTestAnswer GetUserQuestion(int userID, int userTestID, int userAnswerID)
         {
             UserTestAnswer userTestAnswer = this.repositoryContext.UserTestAnswerRepository.Get(userAnswerID);
-            Question question = this.repositoryContext.QuestionRepository.Get(userTestAnswer.QuestionID);
-            return question;
+            return userTestAnswer;
         }
 
-        public Question[] GetUserQuestions(int userID, int userTestID)
+        public UserTestAnswer GetNextUserQuestion(int userID, int userTestID, int currentAnswerID)
+        {
+            UserTestAnswer userTestAnswer = this.repositoryContext.UserTestAnswerRepository.GetNext(userTestID, currentAnswerID);
+            return userTestAnswer;
+        }
+
+        public UserTestAnswer[] GetUserQuestions(int userID, int userTestID)
         {
             UserTestAnswer[] userTestAnswers = this.repositoryContext.UserTestAnswerRepository.List(userTestID);
-            return userTestAnswers.Select(uta => uta.Question).ToArray();
+            return userTestAnswers.ToArray();
         }
 
         public void AnswerQuestion(int userTestAnswerID, int availableAnswerID)
