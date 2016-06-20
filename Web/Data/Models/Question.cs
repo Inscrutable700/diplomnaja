@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Models
 {
@@ -13,5 +14,7 @@ namespace Data.Models
         public Test Test { get; set; }
 
         public ICollection<AvailableAnswer> AwailableAnswers { get; set; }
+        
+        public int RightAnswerID { get; set; }
     }
 }

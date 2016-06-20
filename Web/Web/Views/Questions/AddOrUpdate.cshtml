@@ -14,23 +14,20 @@
     <input type="hidden" name="testID" value="@Model.Question.TestID" />
 
     <div class="form-group">
-        <label class="col-md-2 control-label">Question</label>
-        <div class="col-md-10">
-            <input class="form-control" name="questionString" required value="@Model.Question.QuestionString" />
-        </div>
+        <label for="question">Question:</label>
+        <textarea id="question" class="form-control" rows="5" name="questionString" required>@Model.Question.QuestionString</textarea>
     </div>
     <div class="form-group">
-        <label class="col-md-2 control-label">Available Answers</label>
-        <div class="col-md-5">
-            <ol>
+        <label for="answers">Available Answers:</label>
+        <div id="answers" class="">
+            <ol class="list-group">
                 @{
                     int i = 0;
                 }
                 @foreach (var answer in Model.Question.AvailableAnswers)
                 {
-                    <li>
-                        <input type="checkbox" name="availableAnswers[@i].IsTrue" value="true" @(answer.IsTrue ? "checked" : null) />
-                        <input type="text" name="availableAnswers[@i].AnswerString" value="@answer.AnswerString" />
+                    <li class="list-group-item">
+                        <input type="text" class="form-control" size="2566" name="availableAnswers[@i].AnswerString" value="@answer.AnswerString" />
                         <input type="hidden" name="availableAnswers[@i].QuestionID" value="@answer.QuestionID" />
                     </li>
 
@@ -39,22 +36,54 @@
 
                 @for (int j = i; j < 4; j++)
                 {
-                    <li>
-                        <input type="checkbox" name="availableAnswers[@j].IsTrue" value="true"/>
-                        <input type="text" name="availableAnswers[@j].AnswerString" />
+                    <li class="list-group-item">
+                        <input type="text" class="form-control" name="availableAnswers[@j].AnswerString" />
                         <input type="hidden" name="availableAnswers[@j].QuestionID" />
                     </li>
                 }
             </ol>
+
+            <label for="rightAnswer">Right answer:</label>
+            <select class="form-control" id="rightAnswer" name="rightAnswerNumber">
+                @for (int j = 0; j < 4; j++)
+                {
+                    <option value="@j" @if (j == Model.Question.RightAnswerNumber) { @("selected") } >@(j + 1)</option>
+                }
+            </select>
         </div>
     </div>
 
     @if (Model.IsUpdate)
     {
-        <input class="btn-default" type="submit" value="Update question" />
+        <input class="btn btn-success" type="submit" value="Update question" />
     }
     else
     {
-        <input class="btn-default" type="submit" value="Add question" />
+        <input class="btn btn-success" type="submit" value="Add question" />
     }
 </form>
+
+<h2>Available latext symbols for math logic</h2>
+
+<h4>Use \(\backslash(formula\backslash)\) for insert formula</h4>
+<ol>
+    <li>\(\Leftarrow\) - \Leftarrow</li>
+    <li>\(\Rightarrow\) - \Rightarrow</li>
+    <li>\(\leftarrow\) - \leftarrow</li>
+    <li>\(\rightarrow\) - \rightarrow</li>
+    <li>\(\leftrightarrow\) - \leftrightarrow</li>
+    <li>\(\Leftrightarrow\) - \Leftrightarrow</li>
+    <li>\(\vee\) - \vee</li>
+    <li>\(\wedge\) - \wedge</li>
+    <li>\(\lnot\) - \lnot</li>
+    <li>\(\forall\) - \forall</li>
+    <li>\(\exists\) - \exists</li>
+    <li>\(\notin\) - \notin</li>
+    <li>\(\in\) - \in</li>
+    <li>\(\subset\) - \subset</li>
+    <li>\(\supset\) - \supset</li>
+    <li>\(\subseteq\) - \subseteq</li>
+    <li>\(\supseteq\) - \supseteq</li>
+</ol>
+
+<a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D0%BA%D0%B8%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F:%D0%A4%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D1%8B" target="_blank">All symbols</a>

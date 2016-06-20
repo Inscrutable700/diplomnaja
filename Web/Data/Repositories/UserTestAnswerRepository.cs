@@ -51,7 +51,8 @@ namespace Data.Repositories
 
         public void Update(UserTestAnswer entity)
         {
-            throw new NotImplementedException();
+            this.DataContext.Entry(entity).State = EntityState.Modified;
+            this.DataContext.SaveChanges();
         }
     }
 }

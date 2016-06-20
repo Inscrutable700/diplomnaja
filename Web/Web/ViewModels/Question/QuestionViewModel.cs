@@ -9,5 +9,7 @@
         public int TestID { get; set; }
 
         public AvailableAnswerViewModel[] AvailableAnswers { get; set; }
+
+        public int RightAnswerNumber { get; set; }
     }
 }

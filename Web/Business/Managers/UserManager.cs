@@ -119,5 +119,13 @@ namespace Business.Managers
             UserTestAnswer[] userTestAnswers = this.repositoryContext.UserTestAnswerRepository.List(userTestID);
             return userTestAnswers.Select(uta => uta.Question).ToArray();
         }
+
+        public void AnswerQuestion(int userTestAnswerID, int availableAnswerID)
+        {
+            UserTestAnswer userTestAnswer = this.repositoryContext.UserTestAnswerRepository.Get(userTestAnswerID);
+            userTestAnswer.AnswerID = availableAnswerID;
+            userTestAnswer.DateCompleted = DateTime.UtcNow;
+            this.repositoryContext.UserTestAnswerRepository.Update(userTestAnswer);
+        }
     }
 }

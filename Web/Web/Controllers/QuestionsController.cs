@@ -58,6 +58,16 @@ namespace Web.Controllers
             return View(model);
         }
 
+        public ActionResult Answer(int userQuestionID, int availableAnswerID)
+        {
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                businessContext.UserManager.AnswerQuestion(userQuestionID, availableAnswerID);
+            }
+
+            return this.View();
+        }
+
         public ActionResult AddOrUpdate(int? testID = null, int? id = null)
         {
             AddOrUpdateQuestionViewModel model = new AddOrUpdateQuestionViewModel();
@@ -74,6 +84,14 @@ namespace Web.Controllers
                 {
                     Question question = businessContext.QuestionManager.GetQuestion(id.Value);
                     model.Question = Mapper.Map(question, model.Question);
+                    for(int i = 0; i < model.Question.AvailableAnswers.Length; i++)
+                    {
+                        if (model.Question.AvailableAnswers[i].ID == question.RightAnswerID)
+                        {
+                            model.Question.RightAnswerNumber = i;
+                        }
+                    }
+
                     model.IsUpdate = true;
                 }
             }
@@ -95,14 +113,19 @@ namespace Web.Controllers
                 {
                     Question question = Mapper.Map<Question>(model);
                     AvailableAnswer[] answers = Mapper.Map<AvailableAnswer[]>(model.AvailableAnswers);
-                    businessContext.QuestionManager.AddQuestion(question, answers);
+                    businessContext.QuestionManager.AddQuestion(question, answers, model.RightAnswerNumber);
                 }
                 else
                 {
                     Question question = businessContext.QuestionManager.GetQuestion(model.ID.Value);
                     question = Mapper.Map(model, question);
                     AvailableAnswer[] answers = Mapper.Map<AvailableAnswer[]>(model.AvailableAnswers);
-                    businessContext.QuestionManager.UpdateQuestion(question, answers);
+                    if(answers.Length > model.RightAnswerNumber)
+                    {
+                        answers[model.RightAnswerNumber].IsTrue = true;
+                    }
+
+                    businessContext.QuestionManager.UpdateQuestion(question, answers, model.RightAnswerNumber);
                 }
             }
 

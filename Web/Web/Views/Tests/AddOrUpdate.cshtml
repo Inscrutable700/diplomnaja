@@ -72,7 +72,10 @@
                             <tr>
                                 <td>@question.QuestionString</td>
                                 <td>Available answers</td>
-                                <td><a href="@Url.Action("AddOrUpdate", "Questions", new { id = question.ID })">Edit</a></td>
+                                <td>
+                                    <a class="btn btn-info" href="@Url.Action("AddOrUpdate", "Questions", new { id = question.ID })">Edit</a>
+                                    <a class="btn btn-info" href="@Url.Action("Preview", "Questions", new { id = question.ID })">Preview</a>
+                                </td>
                             </tr>
                         }
                     </tbody>

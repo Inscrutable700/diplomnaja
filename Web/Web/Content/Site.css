@@ -20,7 +20,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
 }
 
 
@@ -32,4 +32,9 @@ textarea {
 }
 .panel-heading a.collapsed:after {
     content:"\e080";
+}
+
+ol li.list-group-item { 
+    list-style: decimal inside;
+    display: list-item;
 }

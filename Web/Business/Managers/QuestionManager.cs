@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Data;
+﻿using Data;
 using Data.Models;
 
 namespace Business.Managers
@@ -11,17 +10,17 @@ namespace Business.Managers
         {
         }
 
-        public Question AddQuestion(Question question, AvailableAnswer[] answers)
+        public Question AddQuestion(Question question, AvailableAnswer[] answers, int rightAnswerNumber)
         {
             question = this.repositoryContext.QuestionRepository.Add(question);
-            this.AddAnswers(question.ID, answers);
+            this.AddAnswers(question, answers, rightAnswerNumber);
             return question;
         }
 
-        public void UpdateQuestion(Question question, AvailableAnswer[] answers)
+        public void UpdateQuestion(Question question, AvailableAnswer[] answers, int rightAnswerNumber)
         {
             this.repositoryContext.QuestionRepository.Update(question);
-            this.AddAnswers(question.ID, answers);
+            this.AddAnswers(question, answers, rightAnswerNumber);
         }
 
         public Question GetQuestion(int id)
@@ -39,21 +38,27 @@ namespace Business.Managers
             this.repositoryContext.QuestionRepository.Delete(question);
         }
 
-        private void AddAnswers(int questionID, AvailableAnswer[] answers)
+        private void AddAnswers(Question question, AvailableAnswer[] answers, int rightAnswerNumber)
         {
             if (answers != null)
             {
-                answers = answers.Where(a => !string.IsNullOrEmpty(a.AnswerString)).ToArray();
+                //answers = answers.Where(a => !string.IsNullOrEmpty(a.AnswerString)).ToArray();
 
-                var answersForRemove = this.repositoryContext.AvailableAnswerRepository.List(questionID);
+                var answersForRemove = this.repositoryContext.AvailableAnswerRepository.List(question.ID);
                 this.repositoryContext.AvailableAnswerRepository.DeleteRange(answersForRemove);
                 
                 foreach (AvailableAnswer answer in answers)
                 {
-                    answer.QuestionID = questionID;
+                    answer.QuestionID = question.ID;
                 }
 
-                this.repositoryContext.AvailableAnswerRepository.AddRange(answers);
+                answers = this.repositoryContext.AvailableAnswerRepository.AddRange(answers);
+
+                if (answers.Length > rightAnswerNumber)
+                {
+                    question.RightAnswerID = answers[rightAnswerNumber].ID;
+                    this.repositoryContext.QuestionRepository.Update(question);
+                }
             }
         }
 
