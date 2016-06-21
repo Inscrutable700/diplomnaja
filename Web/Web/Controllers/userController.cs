@@ -15,6 +15,7 @@ namespace Web.Controllers
         }
 
         // GET: user
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             UserListViewModel model = new UserListViewModel();

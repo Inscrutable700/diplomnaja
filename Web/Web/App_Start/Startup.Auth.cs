@@ -20,6 +20,7 @@ namespace Web
             Mapper.AddProfile(new TestProfile());
             Mapper.AddProfile(new UserProfile());
             Mapper.AddProfile(new QuestionProfile());
+            Mapper.AddProfile(new GroupProfile());
 
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);

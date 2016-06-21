@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using Business;
 using Core.Enums;
 using Data.Models;
@@ -12,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Web.Models;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -142,7 +145,16 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                Group[] groups = businessContext.GroupManager.GetGroups();
+                List<SelectListItem> groupModels = Mapper.Map<List<SelectListItem>>(groups);
+                groupModels.Insert(0, new SelectListItem { });
+                model.GroupModels = groupModels.ToArray();
+            }
+
+            return View(model);
         }
 
         //
@@ -163,7 +175,10 @@ namespace Web.Controllers
                     {
                         Type = UserType.Student,
                         Email = model.Email,
-                        Name = model.Email,
+                        Name = $"{model.FirstName} {model.LastName}",
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        GroupID = model.GroupID,
                     };
 
                     using (BusinessContext businessContext = new BusinessContext())
@@ -181,6 +196,14 @@ namespace Web.Controllers
                 }
 
                 AddErrors(result);
+            }
+
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                Group[] groups = businessContext.GroupManager.GetGroups();
+                List<SelectListItem> groupModels = Mapper.Map<List<SelectListItem>>(groups);
+                groupModels.Insert(0, new SelectListItem { });
+                model.GroupModels = groupModels.ToArray();
             }
 
             // If we got this far, something failed, redisplay form

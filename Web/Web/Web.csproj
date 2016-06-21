@@ -214,6 +214,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RoleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -229,6 +230,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MappingProfiles\AcademicSubjectProfile.cs" />
+    <Compile Include="MappingProfiles\GroupProfile.cs" />
     <Compile Include="MappingProfiles\ProfileBase.cs" />
     <Compile Include="MappingProfiles\QuestionProfile.cs" />
     <Compile Include="MappingProfiles\TestProfile.cs" />
@@ -241,6 +243,7 @@
     <Compile Include="ViewModels\AcademicSubject\AcademicSubjectListViewModel.cs" />
     <Compile Include="ViewModels\AcademicSubject\AcademicSubjectViewModel.cs" />
     <Compile Include="ViewModels\AcademicSubject\AddOrUpdateAcademicSubjectViewModel.cs" />
+    <Compile Include="ViewModels\GetRegisterViewModel.cs" />
     <Compile Include="ViewModels\Group\AddOrUpdateGroupViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupListViewModel.cs" />
     <Compile Include="ViewModels\Group\GroupViewModel.cs" />
