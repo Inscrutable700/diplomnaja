@@ -9,7 +9,6 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
@@ -20,7 +19,6 @@
         @foreach (var user in Model.Users)
         {
             <tr>
-                <td>@user.ID</td>
                 <td><a href="@Url.Action("Item", "User", new { id = user.ID })">@user.Name</a></td>
                 <td>@user.Email</td>
                 <td>@user.Type.ToString()</td>

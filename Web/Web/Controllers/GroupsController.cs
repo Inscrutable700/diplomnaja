@@ -123,7 +123,9 @@ namespace Web.Controllers
                 }
 
 
-                User[] groupUsers = businessContext.GroupManager.GetUsers(groupID);
+                User[] groupUsers = businessContext.GroupManager.GetUsers(groupID)
+                    .OrderBy(gu => gu.FirstName)
+                    .ToArray();
                 foreach(User user in groupUsers)
                 {
                     GroupJournalViewModel.User groupUser = new GroupJournalViewModel.User()
