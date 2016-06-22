@@ -56,11 +56,6 @@ namespace Business.Managers
                         userTestAnswer.Points = pointsPerQuestion;
                         testPoints += pointsPerQuestion;
                     }
-                    else
-                    {
-                        userTestAnswer.Points = -pointsPerQuestion;
-                        testPoints -= pointsPerQuestion;
-                    }
 
                     this.repositoryContext.UserTestAnswerRepository.Update(userTestAnswer);
                 }

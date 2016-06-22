@@ -11,5 +11,7 @@ namespace Web.ViewModels
         public bool IsCompleted { get; set; }
 
         public int UserTestID { get; set; }
+
+        public int UserTestAnswerID { get; set; }
     }
 }

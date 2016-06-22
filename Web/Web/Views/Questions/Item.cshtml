@@ -14,7 +14,7 @@ else
     <span>Питання:</span> @Model.Question.QuestionString
 
     <form action="@Url.Action("Answer", "Questions")" method="post">
-        <input type="hidden" name="userQuestionID" value="@Model.Question.ID" />
+        <input type="hidden" name="userQuestionID" value="@Model.UserTestAnswerID" />
         <input type="hidden" name="userTestID" value="@Model.UserTestID" />
         <ul class="list-group">
             @foreach (var answer in Model.Question.AvailableAnswers)
@@ -27,7 +27,7 @@ else
         </ul>
 
         <input type="submit" class="btn btn-success" value="Відповісти" />
-        <a class="btn btn-info" href="@Url.Action("NextItem", "Questions", new { userTestID = Model.UserTestID, userQuestionID = Model.Question.ID})">Наступний</a>
+        <a class="btn btn-info" href="@Url.Action("NextItem", "Questions", new { userTestID = Model.UserTestID, userQuestionID = Model.UserTestAnswerID})">Наступний</a>
 
     </form>
     <br />

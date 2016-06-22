@@ -43,7 +43,7 @@ namespace Data.Repositories
             return this.DataContext.UserTestAnswers
                 .Include(uta => uta.Question)
                 .Where(uta => uta.UserTestID == userTestID)
-                .Where(uta => uta.QuestionID > id)
+                .Where(uta => uta.ID > id)
                 .OrderBy(uta => uta.ID)
                 .FirstOrDefault();
         }

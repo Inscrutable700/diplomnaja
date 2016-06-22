@@ -9,7 +9,7 @@
 <h3>@Model.UserTest.Description</h3>
 
 <a class="btn btn-success" href="@Url.Action("Item", "Questions", new { userTestID = Model.UserTest.ID })">Пройти тест</a>
-<a class="btn btn-success" href="@Url.Action("Result", "Tests", new { userTestID = Model.UserTest.ID })">Результат</a>
+<a class="btn btn-success"  href="@Url.Action("Result", "Tests", new { userTestID = Model.UserTest.ID })">Результат</a>
 <br />
 <br />
 <form action="@Url.Action("FinishTest", "Tests")" method="post">

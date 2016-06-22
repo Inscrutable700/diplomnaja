@@ -33,7 +33,9 @@ namespace Web.Controllers
                 User user = businessContext.UserManager.GetUser(this.User.Identity.Name);
                 UserTest userTest = businessContext.UserManager.GetUserTest(userTestID);
                 model.IsCompleted = userTest.IsCompleted;
-                UserTestAnswer[] questions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID);
+                UserTestAnswer[] questions = businessContext.UserManager.GetUserQuestions(user.ID, userTestID)
+                    .OrderBy(q => q.ID)
+                    .ToArray();
                 UserTestAnswer userQuestion = null;
                 if (userQuestionID != null)
                 {
@@ -46,6 +48,7 @@ namespace Web.Controllers
                 }
 
                 model.Question = Mapper.Map<QuestionViewModel>(userQuestion.Question);
+                model.UserTestAnswerID = userQuestion.ID;
                 AvailableAnswer[] answers = businessContext.QuestionManager.GetAvailableAnswers(userQuestion.Question.ID);
                 model.Question.AvailableAnswers = Mapper.Map<AvailableAnswerViewModel[]>(answers);
                 model.AllQuestions = questions.Select(q => new SelectListItem

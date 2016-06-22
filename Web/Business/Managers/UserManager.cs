@@ -109,7 +109,7 @@ namespace Business.Managers
             Random random = new Random();
             List<Question> randomQuestions = new List<Question>();
             Question[] questionsT = new List<Question>(questions).ToArray();
-            for(int i = 0; i < count; count++)
+            for(int i = 0; i < count; i++)
             {
                 int randomIndex = random.Next(i, count - 1);
                 randomQuestions.Add(questionsT[randomIndex]);

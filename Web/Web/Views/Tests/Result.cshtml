@@ -43,7 +43,7 @@
                             <tr>
                                 <td>@answer.Question.QuestionString</td>
                                 <td>@answer.RightAnswer.AnswerString</td>
-                                <td>@answer.Answer.AnswerString</td>
+                                <td>@if (answer.Answer != null) { @(answer.Answer.AnswerString)}</td>
                                 <td>@answer.Points</td>
                             </tr>
                         }
