@@ -12,6 +12,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -22,7 +23,31 @@
                 <td>@user.ID</td>
                 <td><a href="@Url.Action("Item", "User", new { id = user.ID })">@user.Name</a></td>
                 <td>@user.Email</td>
-                <td><a class="btn btn-info" href="@Url.Action("Tests", "User", new { userID = user.ID })">Tests</a></td>
+                <td>@user.Type.ToString()</td>
+                <td>
+                    <a class="btn btn-info" href="@Url.Action("Tests", "User", new { userID = user.ID })">Tests</a>
+                </td>
+                <td>
+                    @if (Model.IsAdmin)
+                    {
+                        if (user.Type == Core.Enums.UserType.Student)
+                        {
+                            <form action="@Url.Action("SetRole", "Account")" method="post">
+                                <input type="hidden" name="userID" value="@user.ID" />
+                                <input type="hidden" name="userType" value="@Core.Enums.UserType.Teacher" />
+                                <input class="btn btn-info" type="submit" value="Set as teacher" />
+                            </form>
+                        }
+                        else if (user.Type == Core.Enums.UserType.Teacher)
+                        {
+                            <form action="@Url.Action("SetRole", "Account")" method="post">
+                                <input type="hidden" name="userID" value="@user.ID" />
+                                <input type="hidden" name="userType" value="@Core.Enums.UserType.Student" />
+                                <input class="btn btn-info" type="submit" value="Set as student" />
+                            </form>
+                        }
+                    }
+                </td>
             </tr>
         }
     </tbody>

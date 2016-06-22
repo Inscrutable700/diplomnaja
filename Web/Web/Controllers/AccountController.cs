@@ -58,6 +58,22 @@ namespace Web.Controllers
             }
         }
 
+        [HttpPost, Authorize(Roles = "admin")]
+        public ActionResult SetRole(int userID, UserType userType)
+        {
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                User user = businessContext.UserManager.GetUser(userID);
+                if(userType != UserType.Admin)
+                {
+                    user.Type = userType;
+                    businessContext.UserManager.UpdateUser(user);
+                }
+            }
+
+            return this.RedirectToAction("Index", "User");
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -81,10 +97,34 @@ namespace Web.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
+            ApplicationDbContext context = this.Request.GetOwinContext().Get<ApplicationDbContext>();
+            ApplicationUser appUser = context.Users.SingleOrDefault(u => u.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase));
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    using (BusinessContext businessContext = new BusinessContext())
+                    {
+                        User user = businessContext.UserManager.GetUser(appUser.Email);
+                        string role = string.Empty;
+                        switch (user.Type)
+                        {
+                            case UserType.Admin:
+                                role = "admin";
+                                break;
+
+                            case UserType.Teacher:
+                                role = "teacher";
+                                break;
+
+                            case UserType.Student:
+                                role = "student";
+                                break;
+                        }
+
+                        this.UserManager.RemoveFromRoles(appUser.Id, "teacher", "admin", "student");
+                        this.UserManager.AddToRole(appUser.Id, role);
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using AutoMapper;
 using Business;
 using Data.Models;
@@ -15,12 +14,13 @@ namespace Web.Controllers
         }
 
         // GET: user
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, teacher")]
         public ActionResult Index()
         {
             UserListViewModel model = new UserListViewModel();
             using (BusinessContext businessContext = new BusinessContext())
             {
+                model.IsAdmin = this.User.IsInRole("admin");
                 User[] users = businessContext.UserManager.GetUsers();
                 model.Users = Mapper.Map<User[], UserViewModel[]>(users);
             }
@@ -28,6 +28,7 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, teacher")]
         public ActionResult Item(int id)
         {
             UserItemViewModel model = new UserItemViewModel();
@@ -40,9 +41,9 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin, teacher")]
         public ActionResult Tests(int userID)
         {
-
 
             return View();
         }
