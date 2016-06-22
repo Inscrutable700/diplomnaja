@@ -238,6 +238,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\Group\GroupJournalViewModel.cs" />
+    <Compile Include="ViewModels\Test\TestStatisticViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AcademicSubject\AcademicSubjectListViewModel.cs" />
@@ -338,6 +340,7 @@
     <Content Include="Views\Tests\Item.cshtml" />
     <Content Include="Views\Questions\Item.cshtml" />
     <Content Include="Views\Tests\Result.cshtml" />
+    <Content Include="Views\Groups\Journal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

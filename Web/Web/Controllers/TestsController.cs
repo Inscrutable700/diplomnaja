@@ -141,5 +141,14 @@ namespace Web.Controllers
 
             return this.RedirectToAction("Result", new { userTestID = userTestID });
         }
+
+        public ActionResult Statistic(int testID)
+        {
+
+
+
+
+            return this.View();
+        }
     }
 }

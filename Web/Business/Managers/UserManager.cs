@@ -44,6 +44,11 @@ namespace Business.Managers
             return this.repositoryContext.UserRepository.List();
         }
 
+        public UserTest[] GetUserCompletedTests(int userID)
+        {
+            return this.repositoryContext.UserTestRepository.ListByUser(userID, onlyCompleted: true);
+        }
+
         public UserTestsDto GetUserTests(int userID)
         {
             UserTestsDto result = new UserTestsDto();
@@ -101,8 +106,17 @@ namespace Business.Managers
 
         public Question[] GetRandomQuestions(int count, Question[] questions)
         {
+            Random random = new Random();
             List<Question> randomQuestions = new List<Question>();
-            randomQuestions = questions.Take(count).ToList();
+            Question[] questionsT = new List<Question>(questions).ToArray();
+            for(int i = 0; i < count; count++)
+            {
+                int randomIndex = random.Next(i, count - 1);
+                randomQuestions.Add(questionsT[randomIndex]);
+                Question temp = questionsT[i];
+                questionsT[i] = questionsT[randomIndex];
+                questionsT[randomIndex] = temp;
+            }
 
             return randomQuestions.ToArray();
         }

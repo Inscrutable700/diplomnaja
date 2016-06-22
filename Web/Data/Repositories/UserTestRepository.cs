@@ -68,14 +68,20 @@ namespace Data.Repositories
             throw new NotImplementedException();
         }
 
-        public UserTest[] ListByUser(int userID)
+        public UserTest[] ListByUser(int userID, bool onlyCompleted = false)
         {
-            return this.DataContext.UserTests
+            var userTests = this.DataContext.UserTests
                 .Include(ut => ut.Test)
                 .Include(ut => ut.GroupToTest)
                 .Include(ut => ut.User)
-                .Where(ut => ut.UserID == userID)
-                .ToArray();
+                .Where(ut => ut.UserID == userID);
+
+            if (onlyCompleted)
+            {
+                userTests = userTests.Where(ut => ut.IsCompleted);
+            }
+
+            return userTests.ToArray();
         }
 
         public void Update(UserTest entity)

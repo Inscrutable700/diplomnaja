@@ -21,7 +21,10 @@
             <tr>
                 <td>@group.ID</td>
                 <td><a href="@Url.Action("Item", "Groups", new { id = group.ID })">@group.Name</a></td>
-                <td><a class="btn btn-info" href="@Url.Action("AddOrUpdate", "Groups", new { id = group.ID })">Edit</a></td>
+                <td>
+                    <a class="btn btn-info" href="@Url.Action("AddOrUpdate", "Groups", new { id = group.ID })">Edit</a>
+                    <a class="btn btn-info" href="@Url.Action("Journal", "Groups", new { groupID = group.ID })">Journal</a>
+                </td>
             </tr>
         }
     </tbody>

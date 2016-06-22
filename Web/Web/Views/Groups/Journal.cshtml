@@ -1,0 +1,39 @@
+﻿@model Web.ViewModels.GroupJournalViewModel
+@{
+    ViewBag.Title = "Journal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Journal for @Model.GroupName</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td></td>
+            @foreach (var test in Model.Tests)
+            {
+                <td>@test.Name <br /> (@test.MaxPoints)</td>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                @foreach(var test in Model.Tests)
+                {
+                    <td>
+                        @if (user.Points.ContainsKey(test.ID))
+                        {
+                            @:@user.Points[test.ID]
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

@@ -57,13 +57,21 @@ namespace Business.Managers
                 this.businessContext.UserManager.AssignTestToUsers(groupID, testID, groupToTest);
             }
         }
-
-
-
+        
         public Test[] GetTests(int groupID)
         {
             GroupToTest[] groupSubjects = this.repositoryContext.GroupToTestRepository.ListByGroup(groupID);
             return groupSubjects.Select(gs => gs.Test).ToArray();
+        }
+
+        public GroupToTest[] GetGroupTests(int groupID)
+        {
+            return this.repositoryContext.GroupToTestRepository.ListByGroup(groupID).ToArray();
+        }
+
+        public User[] GetUsers(int groupID)
+        {
+            return this.repositoryContext.UserRepository.ListByGroup(groupID);
         }
     }
 }

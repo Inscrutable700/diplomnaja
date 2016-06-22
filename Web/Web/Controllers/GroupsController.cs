@@ -103,5 +103,46 @@ namespace Web.Controllers
 
             return RedirectToAction("AddOrUpdate", new { id = groupID });
         }
+
+        public ActionResult Journal(int groupID)
+        {
+            GroupJournalViewModel model = new GroupJournalViewModel();
+            using (BusinessContext businessContext = new BusinessContext())
+            {
+                Group group = businessContext.GroupManager.GetGroup(groupID);
+                model.GroupName = group.Name;
+                GroupToTest[] groupTests = businessContext.GroupManager.GetGroupTests(groupID);
+                foreach (GroupToTest groupTest in groupTests)
+                {
+                    model.Tests.Add(new GroupJournalViewModel.Test
+                    {
+                        ID = groupTest.TestID,
+                        Name = groupTest.Test.Name,
+                        MaxPoints = groupTest.PointsForComplete,
+                    });
+                }
+
+
+                User[] groupUsers = businessContext.GroupManager.GetUsers(groupID);
+                foreach(User user in groupUsers)
+                {
+                    GroupJournalViewModel.User groupUser = new GroupJournalViewModel.User()
+                    {
+                        ID = user.ID,
+                        Name = user.Name,
+                    };
+
+                    UserTest[] userCompletedTests = businessContext.UserManager.GetUserCompletedTests(user.ID);
+                    foreach(var userCompletedTest in userCompletedTests)
+                    {
+                        groupUser.Points.Add(userCompletedTest.TestID, userCompletedTest.Points);
+                    }
+
+                    model.Users.Add(groupUser);
+                }
+            }
+            
+            return View(model);
+        }
     }
 }
